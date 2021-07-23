@@ -1,8 +1,24 @@
 #!/bin/bash
+
 set -euo pipefail
 RPM_SPEC_FILE="build/simp-mockup-component.spec"
-RPM_SPEC_TEMPLATE="build/asset-with-multiple-packages.spec.template"
-TAG_RELEASE_WORKFLOW_SOURCE_FILE="workflows/tag_deploy_github-only.yml"
+
+TAG_RELEASE_WORKFLOW_SOURCE_FILE="${1:-${TAG_RELEASE_WORKFLOW_SOURCE_FILE:-workflows/tag_deploy_github-only.yml}}"
+RPM_SPEC_TEMPLATE="${2:-${RPM_SPEC_TEMPLATE:-build/asset-with-multiple-packages.spec.template}}"
+
+print_run_settings()
+{
+  echo
+  echo '================================================================================'
+  echo 'Testing using the following sources'
+  echo
+  echo "  tag_release file:  ${TAG_RELEASE_WORKFLOW_SOURCE_FILE}"
+  echo "  rpm spec template: ${RPM_SPEC_TEMPLATE}"
+  echo
+  echo '================================================================================'
+  echo
+}
+
 
 validate_files_exist()
 {
@@ -34,9 +50,17 @@ write_rpm_spec_file_from_template()
   sed -e "s/%%MAIN_VER%%/${bumped_ver}/g" -e "s/%%SUB_VER%%/${sub_ver}/g" "$RPM_SPEC_TEMPLATE" > "$RPM_SPEC_FILE"
 }
 
+copy_tag_release_workflow_to_test()
+{
+  local TAG_RELEASE_WORKFLOW_SOURCE_FILE="$1"
+  rm -vf ".github/workflows/tag_deploy*.yml"
+  cp -v "$TAG_RELEASE_WORKFLOW_SOURCE_FILE" ".github/workflows/"
+}
+
 git_commit_tag_and_push_to_trigger_workflow()
 {
   git add -u
+  git add .github/workflows/tag_deploy*.yml || :
   git commit -m "Test bump to ${bumped_ver}"
   bundle exec rake pkg:create_tag_changelog | tee tag.txt
   git tag "$bumped_ver" -F tag.txt
@@ -48,8 +72,11 @@ git_commit_tag_and_push_to_trigger_workflow()
 # main
 # --------------------------------------
 validate_files_exist
+print_run_settings
+
 bumped_ver="$(next_rpm_version "$RPM_SPEC_FILE")"
 write_rpm_spec_file_from_template "$RPM_SPEC_TEMPLATE" "$RPM_SPEC_FILE" "$bumped_ver"
-git_commit_tag_and_push_to_trigger_workflow "$bumped_ver"
-# --------------------------------------
 
+copy_tag_release_workflow_to_test "$TAG_RELEASE_WORKFLOW_SOURCE_FILE"
+
+git_commit_tag_and_push_to_trigger_workflow "$bumped_ver"
