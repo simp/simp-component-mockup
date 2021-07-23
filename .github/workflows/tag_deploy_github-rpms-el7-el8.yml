@@ -104,8 +104,8 @@ jobs:
               workflow_id: 'release_rpms.yml',
               ref: process.env.DEFAULT_BRANCH,
               inputs: {
-                release_tag: process.env.TARGET_TAG
-                build_container_os: centos7
+                release_tag: process.env.TARGET_TAG,
+                build_container_os: 'centos7'
               }
             }).then((result) => {
               console.log( `== Submitted workflow dispatch to build RPMs from el7: status ${result.status}` )
@@ -125,10 +125,10 @@ jobs:
               workflow_id: 'release_rpms.yml',
               ref: process.env.DEFAULT_BRANCH,
               inputs: {
-                release_tag: process.env.TARGET_TAG
-                clean: false
-                clobber: true
-                build_container_os: centos8
+                release_tag: process.env.TARGET_TAG,
+                clean: false,
+                clobber: true,
+                build_container_os: 'centos8'
               }
             }).then((result) => {
               console.log( `== Submitted workflow dispatch to build RPMs from el8: status ${result.status}` )
