@@ -50,11 +50,10 @@ sub is required for the proper functionality of main
 %changelog
 * Thu Aug 31 2017 Jane Doe <jane.doe@simp.com> - %%MAIN_VER%%
 - Fix bug Z
-  - Thanks to Lilia Smith for the PR!
 
 * Mon Jun 12 2017 Jane Doe <jane.doe@simp.com> - %%MAIN_VER%%
 - Prompt user for new input
 
-* Fri Jun 02 2017 Jim Jones <jim.jones@simp.com> - %%MAIN_VER%%-1
+* Fri Jun 02 2017 John Q. Public <john.q.public@simp.com> - %%MAIN_VER%%-1
 - Expand X
 - Fix Y
