@@ -1,6 +1,6 @@
 %global package_name main
 
-%global main_version 1.0.0
+%global main_version 1.0.1
 %global sub_version 0.8.0
 
 Summary: a main package
