@@ -21,7 +21,7 @@ next_rpm_version()
   local x="${xyz[0]}"
   local y=$(( ${xyz[1]} + $y_mod ))
   local z=$(( ${xyz[-1]} + 1 ))
-  >&2 echo "-- bumping from '$cur_ver' to '$x.$y.$z'"
+  >&2 printf "\n-- bumping from '%s' to '%s'\n" "$cur_ver" "$x.$y.$z"
   echo "$x.$y.$z"
 }
 
