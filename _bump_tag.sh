@@ -53,7 +53,7 @@ write_rpm_spec_file_from_template()
 copy_tag_release_workflow_to_test()
 {
   local TAG_RELEASE_WORKFLOW_SOURCE_FILE="$1"
-  rm -vf ".github/workflows/tag_deploy*.yml"
+  rm -vf .github/workflows/tag_deploy*.yml
   cp -v "$TAG_RELEASE_WORKFLOW_SOURCE_FILE" ".github/workflows/"
 }
 
