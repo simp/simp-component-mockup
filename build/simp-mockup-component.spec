@@ -1,7 +1,7 @@
 %global package_name main
 
-%global main_version 1.2.3
-%global sub_version 1.2.3
+%global main_version 1.0.0
+%global sub_version 0.8.0
 
 Summary: a main package
 Name: main
@@ -48,13 +48,13 @@ sub is required for the proper functionality of main
 %files doc
 
 %changelog
-* Thu Aug 31 2017 Jane Doe <jane.doe@simp.com> - 1.2.3
+* Thu Aug 31 2017 Jane Doe <jane.doe@simp.com> - 1.0.1
 - Fix bug Z
   - Thanks to Lilia Smith for the PR!
 
-* Mon Jun 12 2017 Jane Doe <jane.doe@simp.com> - 1.2.3
+* Mon Jun 12 2017 Jane Doe <jane.doe@simp.com> - 1.0.1
 - Prompt user for new input
 
-* Fri Jun 02 2017 Jim Jones <jim.jones@simp.com> - 1.2.3-0
+* Fri Jun 02 2017 Jim Jones <jim.jones@simp.com> - 1.0.1-1
 - Expand X
 - Fix Y
