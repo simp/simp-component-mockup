@@ -71,8 +71,8 @@ git_commit_tag_and_push_to_trigger_workflow()
 # --------------------------------------
 # main
 # --------------------------------------
-validate_files_exist
 print_run_settings
+validate_files_exist
 
 bumped_ver="$(next_rpm_version "$RPM_SPEC_FILE")"
 write_rpm_spec_file_from_template "$RPM_SPEC_TEMPLATE" "$RPM_SPEC_FILE" "$bumped_ver"
